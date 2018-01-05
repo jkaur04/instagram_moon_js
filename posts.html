@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- our local copy of the jquery library. Normally, we'd use a CDN copy to use someone else's bandwidth -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .thumb {
+        height: 75px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+      }
+    </style>
+
+</head>
+<!-- add the onload event handler to the body tag -->
+
+<body>
+
+
+    <div class="container-fluid center">
+        <div class="container">
+            <h1>Instagram</h1>
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    
+                </div>
+     
+
+            </div>
+        </div>
+    </div>
+
+ 
+    <!-- create a div with an id to give us an anchor point to let the javascript do its work -->
+    <!-- create a div with an id to give us an anchor point to let the javascript do its work -->
+    <div id="posts">
+        <div m-for="item in img" class='data_box'>
+            <div class='data_box_header'>
+                 <div class='user_img'></div>
+                 <username>nature_like</username>
+                 <time>4h</time>
+            </div>
+            <div class='data_box_center'>
+                <img src="{{item}}" class='img-responsive'>
+            </div>
+            <div  class='data_box_comments' id="likeNumbers">
+                <p>Like: {{count}}</p>
+                <button m-on:click="increment">Increment</button>
+              <p>{{comment}}</p>
+            </div>
+            <div class='add_new_comment'>
+                 <likeBtn class='like_image_btn greyHeart' _id='" + unique_id + "' onclick='likeClick(\"" + post._id + "\",this);'></likeBtn>
+                   <input class='add_comments_text' type='text' placeholder='Add a Comment...' id="cmnt">
+                    <button m-on:click="comment">Comment</button>
+                <div class='more_options'></div>
+            </div>
+                 
+        </div>
+        
+            
+    </div>
+    </div>
+    <script src="https://unpkg.com/moonjs"></script>
+  <script src="https://unpkg.com/moonjs/dist/moon.js"></script>
+  <script src="https://unpkg.com/moon-router"></script>
+  <script>
+
+  const posts = new Moon({
+    el: "#posts",
+     data: {
+        count: 0
+      },
+  methods: {
+    changeMessage: function(msg) {
+        var newList = [];
+        newList.push("https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg");
+    		     posts.set('img', newList);
+        
+      
+    },
+    comment: function(){
+        var cmnt = $("#cmnt").val();
+        posts.set("comment", cmnt);
+        
+    },
+    increment: function() {
+      // Increment the count by one
+      this.set('count', this.get('count') + 1);
+    }
+  }
+  });
+  posts.callMethod('changeMessage');
+
+  </script>
+ 
+</body>
+
+</html>
